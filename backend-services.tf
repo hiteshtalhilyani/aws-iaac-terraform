@@ -44,6 +44,16 @@ resource "aws_elasticache_cluster" "webapp-cache" {
 }
 
 resource "aws_mq_broker" "webapp-mq" {
-    
-  
+  broker_name = "webapp-mq"
+  engine_type        = "ActiveMQ"
+  engine_version     = "5.15.9"
+  host_instance_type = "mq.t2.micro"
+  security_groups    = [aws_security_group.webapp-backend-sg.id]
+  subnet_ids = [module.vpc.private_subnets[0]]
+  user {
+    username = var.rmquser
+    password = var.rmqpass
+  }
 }
+
+    

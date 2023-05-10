@@ -4,8 +4,8 @@ module "vpc"{
     name = var.vpc_name
     cidr = var.vpc_cidr
     azs =  [var.ZONE1, var.ZONE2, var.ZONE3]
-    private_subnet = [var.priv1_cidr,var.priv2_cidr,var.priv3_cidr]
-    public_subnet = [var.pub1_cidr, var.pub2_cidr, var.pub3_cidr]
+    private_subnets = [var.priv1_cidr,var.priv2_cidr,var.priv3_cidr]
+    public_subnets = [var.pub1_cidr, var.pub2_cidr, var.pub3_cidr]
 
     enable_dns_hostnames = true
     enable_dns_support   = true

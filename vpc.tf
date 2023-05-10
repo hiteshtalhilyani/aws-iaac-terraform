@@ -11,6 +11,7 @@ module "vpc" {
   enable_dns_support   = true
   enable_nat_gateway   = true
   single_nat_gateway   = true
+  
 
   tags = {
     terraform   = "true"

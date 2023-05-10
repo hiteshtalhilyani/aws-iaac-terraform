@@ -1,2 +1,4 @@
 *.pem
 *.ppk
+.terraform
+.terraform.lock.hcl

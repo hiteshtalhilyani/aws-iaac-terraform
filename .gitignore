@@ -1,5 +1,6 @@
 *.pem
 *.ppk
 .terraform.lock.hcl
-.terraform/*
+.terraform/
 webappkey
+webappkey.pub

@@ -20,35 +20,35 @@ variable "ZONE3" {
   description = "Zone define to create EC2 instance"
 }
 
-variable vpc_name {
-  default = webapp-vpc
+variable "vpc_name" {
+  default = "webapp-vpc"
 }
 
-variable vpc_cidr {
+variable "vpc_cidr" {
   default = "172.21.0.0/16"
 }
 
-variable pub1_cidr {
+variable "pub1_cidr" {
   default = "172.21.1.0/24"
 }
 
-variable pub2_cidr {
+variable "pub2_cidr" {
   default = "172.21.2.0/24"
 }
 
-variable pub3_cidr {
+variable "pub3_cidr" {
   default = "172.21.3.0/24"
 }
 
-variable priv1_cidr {
+variable "priv1_cidr" {
   default = "172.21.4.0/24"
 }
 
-variable priv2_cidr {
+variable "priv2_cidr" {
   default = "172.21.5.0/24"
 }
 
-variable priv3_cidr {
+variable "priv3_cidr" {
   default = "172.21.6.0/24"
 }
 
@@ -56,9 +56,9 @@ variable priv3_cidr {
 variable "AMIS" {
   type = map(any)
   default = {
-    ap-south-1   = "ami-022d03f649d12a49d"    ## EC2 Linux AMI
-    me-central-1 = "ami-05940876d6cc68263"
-    ap-south-1_ubuntu = "ami-03a933af70fa97ad2"  # ubuntu AMI
+    ap-south-1        = "ami-022d03f649d12a49d" ## EC2 Linux AMI
+    me-central-1      = "ami-05940876d6cc68263"
+    ap-south-1_ubuntu = "ami-03a933af70fa97ad2" # ubuntu AMI
   }
 }
 variable "USER" {
@@ -72,11 +72,11 @@ variable "instype" {
   default = "t2.micro"
 }
 
-variable pri_key {
+variable "pri_key" {
   default = "webappkey"
 
 }
-variable pub_key {
+variable "pub_key" {
   default = "webappkey.pub"
 }
 
@@ -85,25 +85,25 @@ variable "MYIP" {
   description = "MY IP to allow Access from SG "
 }
 
-variable rmquser {
+variable "rmquser" {
   default = "rabbit"
 }
-variable rmqpass {
+variable "rmqpass" {
   default = "pass@1234"
 }
 
-variable dbname {
+variable "dbname" {
   default = "accounts"
 }
-variable dbuser {
+variable "dbuser" {
   default = "admin"
 }
 
-variable dbpass {
+variable "dbpass" {
   default = "admin123"
 }
 
-variable instance_count {
+variable "instance_count" {
   default = "1"
 }
 

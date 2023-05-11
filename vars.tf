@@ -89,7 +89,7 @@ variable "rmquser" {
   default = "rabbit"
 }
 variable "rmqpass" {
-  default = "pass@1234"
+  default = "QwerZxcv#$98765"
 }
 
 variable "dbname" {

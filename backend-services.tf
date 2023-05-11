@@ -6,12 +6,12 @@ resource "aws_db_subnet_group" "webapp-rds-subgrp" {
     }
 }
 
-resource "aws_elasticcache_subnet_group" "webapp-cache_subgrp" {
+resource "aws_elasticache_subnet_group" "webapp-cache_subgrp" {
   name = "webapp-cache_subgrp"
   subnet_ids = [module.vpc.private_subnets[0],module.vpc.private_subnets[1],module.vpc.private_subnets[2]]
-    tags = {
-     Name = "Subnet Group for ElasticCache" 
-    }
+   tags = {
+     Name = "Elastic Cache Subgroup"
+   }
 }
 
 resource "aws_db_instance" "webapp-rds" {
@@ -26,7 +26,7 @@ resource "aws_db_instance" "webapp-rds" {
   skip_final_snapshot  = true
   storage_type         = "gp2"
   publicly_accessible = "false"
-  multi_az =           = "false"
+  multi_az           = "false"
   db_subnet_group_name = aws_db_subnet_group.webapp-rds-subgrp.name
   vpc_security_group_ids = [aws_security_group.webapp-backend-sg.id]
 
@@ -40,11 +40,11 @@ resource "aws_elasticache_cluster" "webapp-cache" {
     parameter_group_name = "default.memcached1.5"
     port ="11211"
     security_group_ids = [aws_security_group.webapp-backend-sg.id]
-    subnet_group_name =   aws_elasticcache_subnet_group.webapp-cache_subgrp.name
+    subnet_group_name =   aws_elasticache_subnet_group.webapp-cache_subgrp.name
 }
 
 resource "aws_mq_broker" "webapp-mq" {
-  broker_name = "webapp-mq"
+  broker_name =       "webapp-mq"
   engine_type        = "ActiveMQ"
   engine_version     = "5.15.9"
   host_instance_type = "mq.t2.micro"

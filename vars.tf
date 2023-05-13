@@ -61,7 +61,7 @@ variable "AMIS" {
     ap-south-1_ubuntu = "ami-03a933af70fa97ad2" # ubuntu AMI
   }
 }
-variable "USER" {
+variable "USERNAME" {
   type        = string
   default     = "ubuntu"
   description = "User Name to connect "

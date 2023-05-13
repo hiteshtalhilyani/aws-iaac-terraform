@@ -70,6 +70,12 @@ resource "aws_security_group" "webapp-backend-sg" {
     to_port         = 0
     security_groups = [aws_security_group.webapp-prod-sg.id]
   }
+  ingress {
+    protocol        = "tcp"
+    from_port       = 3306
+    to_port         = 3306
+    security_groups = [aws_security_group.webapp-bastion-sg.id]
+  }
 }
 
 resource "aws_security_group_rule" "sec_grp_allow_itself" {

@@ -1,8 +1,8 @@
-resource "aws_elastic_beanstalk_environment" "webapp-bean-prod" {
-  name =  "webapp-bean-prod"
-  application = aws_elastic_beanstalk_application.webapp-prod.name 
+resource "aws_elastic_beanstalk_environment" "webapp-bean-prod1" {
+  name                = "webapp-bean-prod1"
+  application         = aws_elastic_beanstalk_application.webapp-prod.name
   solution_stack_name = "64bit Amazon Linux 2 v4.3.7 running Tomcat 8.5 Corretto 11"
-  cname_prefix = "webapp-bean-prod-domain"
+  cname_prefix        = "webapp-bean-prod-domain"
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
@@ -21,12 +21,12 @@ resource "aws_elastic_beanstalk_environment" "webapp-bean-prod" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = join(",",[module.vpc.private_subnets[0],module.vpc.private_subnets[1],module.vpc.private_subnets[2]])
+    value     = join(",", [module.vpc.private_subnets[0], module.vpc.private_subnets[1], module.vpc.private_subnets[2]])
   }
- setting {
+  setting {
     namespace = "aws:ec2:vpc"
     name      = "ELBSubnets"
-    value     = join(",",[module.vpc.public_subnets[0],module.vpc.public_subnets[1],module.vpc.public_subnets[2]])
+    value     = join(",", [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.public_subnets[2]])
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -41,76 +41,76 @@ resource "aws_elastic_beanstalk_environment" "webapp-bean-prod" {
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "Availability Zones"
-    value     =  "Any 3"
+    value     = "Any 3"
   }
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MinSize"
-    value     =  "1"
+    value     = "1"
   }
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MaxSize"
-    value     =  "5"  
+    value     = "5"
   }
   setting {
     namespace = "aws:elasticbeanstalk:application:enviornment"
     name      = "environment"
-    value     =  "prod"
+    value     = "prod"
   }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:application:enviornment"
-    name      = "LOGGING_APPENDER"
-    value     =  "GRAYLOG"
-  }
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:application:enviornment"
+  #   name      = "LOGGING_APPENDER"
+  #   value     = "GRAYLOG"
+  # }
 
   setting {
     namespace = "aws:elasticbeanstalk:healthreporting:system"
     name      = "SystemType"
-    value     =  "basic"
- }
+    value     = "basic"
+  }
   setting {
     namespace = "aws:elasticbeanstalk:updatepolicy:rollingupdate"
     name      = "RollingUpdateEnabled"
-    value     =  "true"
- }
+    value     = "true"
+  }
   setting {
     namespace = "aws:elasticbeanstalk:updatepolicy:rollingupdate"
     name      = "RollingUpdateType"
-    value     =  "Health"
- }
-   setting {
+    value     = "Health"
+  }
+  setting {
     namespace = "aws:elasticbeanstalk:updatepolicy:rollingupdate"
     name      = "MaxBatchSize"
-    value     =  "1"
- }
+    value     = "1"
+  }
   setting {
     namespace = "aws:elb:loadbalancer"
     name      = "CrossZone"
-    value     =  "true"
- }
- 
+    value     = "true"
+  }
+
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "StickinessEnabled"
-    value     =  "true"
- }
+    value     = "true"
+  }
   setting {
     namespace = "aws:elasticbeanstalk:command"
     name      = "BatchSizeType"
-    value     =  "Fixed"
- }
+    value     = "Fixed"
+  }
   setting {
     namespace = "aws:elasticbeanstalk:command"
     name      = "BatchSize"
-    value     =  "1"
- }
-    setting {
+    value     = "1"
+  }
+  setting {
     namespace = "aws:elasticbeanstalk:command"
     name      = "DeploymentPolicy"
-    value     =  "Rolling"
- }
+    value     = "Rolling"
+  }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -120,7 +120,7 @@ resource "aws_elastic_beanstalk_environment" "webapp-bean-prod" {
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
-    value     = aws_security_group.webapp-bean-elb-sg.id 
+    value     = aws_security_group.webapp-bean-elb-sg.id
   }
-  depends_on = [aws_security_group.webapp-bean-elb-sg,aws_security_group.webapp-prod-sg]
+  depends_on = [aws_security_group.webapp-bean-elb-sg, aws_security_group.webapp-prod-sg]
 }

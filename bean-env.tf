@@ -1,7 +1,7 @@
-resource "aws_elastic_beanstalk_environment" "webapp-bean-prod1" {
-  name                = "webapp-bean-prod1"
+resource "aws_elastic_beanstalk_environment" "webapp-bean-prod" {
+  name                = "webapp-bean-prod"
   application         = aws_elastic_beanstalk_application.webapp-prod.name
-  solution_stack_name = "64bit Amazon Linux 2 v4.3.7 running Tomcat 8.5 Corretto 11"
+  solution_stack_name = "64bit Amazon Linux 2 v4.1.1 running Tomcat 8.5 Corretto 11"
   cname_prefix        = "webapp-bean-prod-domain"
   setting {
     namespace = "aws:ec2:vpc"
@@ -68,20 +68,20 @@ resource "aws_elastic_beanstalk_environment" "webapp-bean-prod1" {
   setting {
     namespace = "aws:elasticbeanstalk:healthreporting:system"
     name      = "SystemType"
-    value     = "basic"
+    value     = "enhanced"
   }
   setting {
-    namespace = "aws:elasticbeanstalk:updatepolicy:rollingupdate"
+    namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "RollingUpdateEnabled"
     value     = "true"
   }
   setting {
-    namespace = "aws:elasticbeanstalk:updatepolicy:rollingupdate"
+    namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "RollingUpdateType"
     value     = "Health"
   }
   setting {
-    namespace = "aws:elasticbeanstalk:updatepolicy:rollingupdate"
+    namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "MaxBatchSize"
     value     = "1"
   }

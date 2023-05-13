@@ -1,3 +1,4 @@
+
 resource "aws_instance" "bastion-host" {
   ami                    = lookup(var.AMIS, var.REGION)
   instance_type          = var.instype
